@@ -8,6 +8,8 @@ module.exports = function override(config, env) {
     '@src': path.resolve(__dirname, `${paths.appSrc}/`),
     '@styles': path.resolve(__dirname, `${paths.appSrc}/styles/`),
     '@interfaces': path.resolve(__dirname, `${paths.appSrc}/types/`),
+    '@utils': path.resolve(__dirname, `${paths.appSrc}/utils/`),
+    '@components': path.resolve(__dirname, `${paths.appSrc}/components/`),
   })(config, env);
   return config;
 };

@@ -1,22 +1,41 @@
 import React from 'react';
-import { TableCSS } from './styles';
+import { ICell } from '@interfaces/boardTypes';
+import { useBoardHook } from './hooks';
+import { 
+  TableCSS,
+  CellCSS
+} from './styles';
+import { IBoard } from './interface';
 
-const Board = () => {
-  const boardLayout = [
-    [0,0,0],
-    [0,0,0],
-    [0,0,0]
-  ];
+const Board = (props: IBoard) => {
+  const {
+    user
+  } = props;
 
+  const {
+    board,
+    handleBoardClick
+  } = useBoardHook(user);
+  console.log(board,'my board')
   return (
     <TableCSS>
-      {boardLayout.map((col:any, index:any) => {
-        return (
-          <tr key={index}>
-            {col.map((row:any, i:any) => (<td key={i} />))}
-          </tr>
-        )
-      })}
+      <tbody>
+        {board.map((col: ICell[], colIndex: any) => {
+          return (
+            <tr key={colIndex}>
+              {col.map((row: ICell, rowIndex: any) => {
+                return (
+                  <CellCSS
+                    row={row}
+                    key={rowIndex} 
+                    onClick={() => handleBoardClick(colIndex, rowIndex)}
+                  />
+                )
+              })}
+            </tr>
+          )
+        })}
+      </tbody>
     </TableCSS>
   );
 };

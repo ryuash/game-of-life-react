@@ -23,7 +23,9 @@
     "paths": {
       "@styles/*": ["src/styles/*"],
       "@src/*": ["src/*"],
-      "@interfaces/*": ["src/types/*"]
+      "@interfaces/*": ["src/types/*"],
+      "@utils/*": ["src/utils/*"],
+      "@components/*": ["src/components/*"]
     }
   }
 }

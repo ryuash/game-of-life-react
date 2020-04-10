@@ -2,8 +2,8 @@ import React from 'react';
 import { useUsersHook } from './hooks';
 
 const Users = () => {
+  // eslint-disable-next-line
   const { users } = useUsersHook();
-  console.log(users,'users');
   return (
     <h1>users</h1>
   );

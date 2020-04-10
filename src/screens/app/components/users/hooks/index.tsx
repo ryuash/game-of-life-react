@@ -10,9 +10,9 @@ import {
 } from '@src/socket';
 
 export const useUsersHook = () => {
-  const [users, setUsers]:any = useState({});
+  const [users, setUsers]: any = useState({});
 
-  const getAllUsersCallback = (allUsers:any) => {
+  const getAllUsersCallback = (allUsers: any) => {
     setUsers(allUsers);
   };
 
@@ -23,7 +23,7 @@ export const useUsersHook = () => {
     setUsers(currentUsers);
   }, [users]);
 
-  const userLeftCallback = useCallback((socketId:string) => {
+  const userLeftCallback = useCallback((socketId: string) => {
     const currentUsers = R.clone(users);
     delete currentUsers[socketId];
     setUsers(currentUsers);

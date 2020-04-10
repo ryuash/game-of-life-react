@@ -4,7 +4,9 @@
     "src",
     "@src",
     "@styles",
-    "@interfaces"
+    "@interfaces",
+    "@utils",
+    "@components"
   ],
   "compilerOptions": {}
 }
