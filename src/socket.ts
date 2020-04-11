@@ -6,33 +6,23 @@ import { IUser } from '@interfaces/usersTypes';
 export const socket = io(process.env.REACT_APP_API || 'http://localhost:8080');
 
 export const EVENTS = {
-  CONNECT: 'connect',
+  RECONNECT: 'reconnect',
   USER_JOIN: 'userJoin',
   GET_ALL_USERS: 'getAllUsers',
   USER_LEFT: 'userLeft',
   GET_SELF: 'getSelf',
+  USER_ENTER_GAME: 'userEnterGame',
+  USER_REENTER_GAME: 'userReenterGame',
   GET_CURRENT_BOARD: 'getCurrentBoard',
   CLICK_BOARD: 'clickBoard',
   BOARD_UPDATE: 'boardUpdate',
-  USER_ENTER_GAME: 'userEnterGame',
-  USER_REENTER_GAME: 'userReenterGame',
-  RECONNECT: 'reconnect'
 }
 
 export const socketOff = (name: string) => (
   socket.off(name)
 );
 
-export const onConnect = () => {
-  return (
-    socket.on(EVENTS.CONNECT, () => {
-      console.log('Connected to server!')
-    })
-  )
-}
-
 socket.on(EVENTS.RECONNECT, () => {
-  console.log('reconnecting')
   const oldSocketId = Cookies.get('currentSocketId');
   socket.emit(EVENTS.USER_REENTER_GAME, oldSocketId);
 })
@@ -58,7 +48,6 @@ export const getSelf = (callback: Function) => {
   return (
     socket.on(EVENTS.GET_SELF, (user: IUser) => {
       Cookies.set('currentSocketId', socket.id , { expires: 1 });
-      console.log(Cookies.get('currentSocketId'),'doesit work')
       callback(user);
     })
   )

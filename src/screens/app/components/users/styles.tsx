@@ -1,13 +1,11 @@
 import styled from 'styled-components';
+import mixins from '@styles/mixins';
 
 export const UsersCSS = styled.div`
-  width: 50%;
-  min-height: 50px;
-  position: absolute;
+  ${mixins.infoContainer}
   top: 0;
   right: -190px;
-  padding: 1rem;
-  border: dashed 2px #d4d1d1;
+  position: absolute;
 `
 
 export const UserTitleCSS = styled.h3`

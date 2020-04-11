@@ -14,4 +14,4 @@ export interface IUpdateBoard {
   color: ICellColor;
 }
 
-export type ICell = IAliveCell | 0;
+export type ICell = IAliveCell | 0 | 1;
