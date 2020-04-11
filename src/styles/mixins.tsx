@@ -8,6 +8,7 @@ const mixins: any = {
     border: dashed 2px #d4d1d1;
     background: white;
     max-width: 200px;
+    border-radius: 4px;
   `,
   shapes: css`
     border-collapse: collapse;

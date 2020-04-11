@@ -3,6 +3,8 @@ import { Button, Form } from 'semantic-ui-react';
 import Loading from '@components/loading';
 import { JoinGameCSS } from './styles';
 import { useJoinGameHook } from './hooks';
+import CreatedBy from '../createdBy';
+
 const JoinGame = () => {
   const {
     loading,
@@ -26,6 +28,7 @@ const JoinGame = () => {
           </Form.Group>
         </Form>
       </JoinGameCSS>
+      <CreatedBy />
     </>
   );
 };

@@ -8,7 +8,8 @@ export const AppCSS = styled.div`
   justify-content: center;
   flex-direction: column;
   overflow: auto;
-  padding: 3rem 1rem;
+  padding: 3rem 0;
+  position: relative;
 `
 
 export const BodyContainerCSS = styled.div`
