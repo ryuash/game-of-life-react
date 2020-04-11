@@ -5,8 +5,8 @@ export const ShapesCSS = styled.div`
   ${mixins.infoContainer}
   position: absolute;
   top: 0;
-  left: -190px;
-  height: 300px;
+  left: -215px;
+  height: 325px;
   overflow-x: auto;
 `;
 

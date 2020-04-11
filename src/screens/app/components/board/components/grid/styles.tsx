@@ -5,9 +5,8 @@ export const TableCSS = styled.table`
   border-collapse: collapse;
 
   td {
-    padding: 1rem;
-    width: 25px;
-    height: 25px;
+    width: 20px;
+    height: 20px;
     border: solid 1px #c4c2c2;
   }
 `

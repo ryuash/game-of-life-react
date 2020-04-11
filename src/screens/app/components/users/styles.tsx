@@ -4,7 +4,7 @@ import mixins from '@styles/mixins';
 export const UsersCSS = styled.div`
   ${mixins.infoContainer}
   top: 0;
-  right: -190px;
+  right: -215px;
   position: absolute;
 `
 

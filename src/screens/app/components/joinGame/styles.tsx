@@ -6,6 +6,7 @@ export const JoinGameCSS = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  padding-bottom: 6rem;
 
   .ui.button {
     margin: 0;

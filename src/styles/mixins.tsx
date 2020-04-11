@@ -7,6 +7,7 @@ const mixins: any = {
     min-height: 50px;
     border: dashed 2px #d4d1d1;
     background: white;
+    max-width: 200px;
   `,
   shapes: css`
     border-collapse: collapse;
@@ -15,7 +16,7 @@ const mixins: any = {
     justify-content: center;
     margin-bottom: 1rem;
     transition: 0.3s;
-    
+
     &:hover {
       cursor: pointer;
       opacity: 0.7
