@@ -6,7 +6,7 @@ export const ShapesCSS = styled.div`
   position: absolute;
   top: 0;
   left: -190px;
-  height: 200px;
+  height: 300px;
   overflow-x: auto;
 `;
 
