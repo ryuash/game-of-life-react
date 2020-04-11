@@ -28,8 +28,8 @@
     "typescript": "~3.7.2"
   },
   "scripts": {
-    "start": "react-app-rewired start start",
-    "start:node": "node server.js",
+    "start": "node server.js",
+    "start:dev": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
     "eject": "react-scripts eject"
