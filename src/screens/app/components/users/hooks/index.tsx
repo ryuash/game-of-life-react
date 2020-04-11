@@ -41,6 +41,6 @@ export const useUsersHook = () => {
   }, [userJoinCallback, userLeftCallback]);
 
   return {
-    users,
+    users: R.values(users)
   }
 }

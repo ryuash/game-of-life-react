@@ -1,4 +1,5 @@
 import io from 'socket.io-client';
+import Cookies from 'js-cookie';
 import { ICell } from '@interfaces/boardTypes';
 import { IUser } from '@interfaces/usersTypes';
 
@@ -13,12 +14,29 @@ export const EVENTS = {
   GET_CURRENT_BOARD: 'getCurrentBoard',
   CLICK_BOARD: 'clickBoard',
   BOARD_UPDATE: 'boardUpdate',
-  USER_ENTER_GAME: 'userEnterGame'
+  USER_ENTER_GAME: 'userEnterGame',
+  USER_REENTER_GAME: 'userReenterGame',
+  RECONNECT: 'reconnect'
 }
 
 export const socketOff = (name: string) => (
   socket.off(name)
 );
+
+export const onConnect = () => {
+  return (
+    socket.on(EVENTS.CONNECT, () => {
+      console.log('Connected to server!')
+    })
+  )
+}
+
+socket.on(EVENTS.RECONNECT, () => {
+  console.log('reconnecting')
+  const oldSocketId = Cookies.get('currentSocketId');
+  socket.emit(EVENTS.USER_REENTER_GAME, oldSocketId);
+})
+
 
 export const getBoard = (callback: Function) => {
   socket.on(EVENTS.GET_CURRENT_BOARD, (board: ICell[][]) => {
@@ -36,17 +54,11 @@ export const onBoardUpdate = (callback: Function) => {
   })
 }
 
-export const onConnect = () => {
-  return (
-    socket.on(EVENTS.CONNECT, () => {
-      console.log('Connected to server!')
-    })
-  )
-}
-
 export const getSelf = (callback: Function) => {
   return (
     socket.on(EVENTS.GET_SELF, (user: IUser) => {
+      Cookies.set('currentSocketId', socket.id , { expires: 1 });
+      console.log(Cookies.get('currentSocketId'),'doesit work')
       callback(user);
     })
   )

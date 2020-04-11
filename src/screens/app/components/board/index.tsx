@@ -16,7 +16,7 @@ const Board = (props: IBoard) => {
     board,
     handleBoardClick
   } = useBoardHook(user);
-  console.log(board,'my board')
+  
   return (
     <TableCSS>
       <tbody>
