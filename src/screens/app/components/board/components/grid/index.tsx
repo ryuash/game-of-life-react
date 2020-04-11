@@ -9,10 +9,11 @@ const Grid = (props:any) => {
   const {
     board,
     handleBoardClick,
+    user
   } = props;
   
   return (
-    <TableCSS>
+    <TableCSS user={user}>
       <tbody>
         {board.map((col: ICell[], colIndex: any) => {
           return (

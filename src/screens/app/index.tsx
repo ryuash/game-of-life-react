@@ -13,7 +13,8 @@ import {
 
 function App() {
   const {
-    user
+    user,
+    connected
   } = useAppHook();
   if (!user.socketId) {
     return (
@@ -29,6 +30,7 @@ function App() {
         <BodyContainerCSS>
           <Board user={user} />
           <Users />
+          <p id="status">status: {connected}</p>
         </BodyContainerCSS>
         <CreatedBy />
       </AppCSS>

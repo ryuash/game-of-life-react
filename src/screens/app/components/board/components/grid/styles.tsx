@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const TableCSS = styled.table`
+export const TableCSS:any = styled.table`
   background: white;
   border-collapse: collapse;
 
@@ -8,6 +8,15 @@ export const TableCSS = styled.table`
     width: 20px;
     height: 20px;
     border: solid 1px #c4c2c2;
+
+    &:hover {
+      cursor: pointer;
+      background: ${(props:any) => {
+        const { user } = props;
+        const { colorR, colorB, colorG } = user;
+        return `rgba(${colorR}, ${colorB}, ${colorG}, 0.2);`
+      }}
+    }
   }
 `
 

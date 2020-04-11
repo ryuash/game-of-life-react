@@ -14,7 +14,7 @@ export const useUsersHook = () => {
 
   const getAllUsersCallback = useCallback((allUsers:any) => {
     setUsers(allUsers);
-  }, [users]);
+  }, []);
 
   const userJoinCallback = useCallback((newUser:IUser) => {
     const currentUsers = R.clone(users);
@@ -38,7 +38,7 @@ export const useUsersHook = () => {
       socketOff(EVENTS.ALL_USERS);
       socketOff(EVENTS.USER_LEFT);
     };
-  }, [userJoinCallback, userLeftCallback]);
+  }, [userJoinCallback, userLeftCallback, getAllUsersCallback]);
 
   return {
     users: R.values(users)

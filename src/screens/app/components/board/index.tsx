@@ -16,12 +16,16 @@ const Board = (props: IBoard) => {
     handleSetShape,
     loading
   } = useBoardHook(user);
-  console.log(loading,'the loading')
+
   return (
     <>
       <Loading active={loading} />
       <Shapes handleSetShape={handleSetShape} />
-      <Grid board={board} handleBoardClick={handleBoardClick} />
+      <Grid 
+        user={user}
+        board={board} 
+        handleBoardClick={handleBoardClick} 
+      />
     </>
   );
 };

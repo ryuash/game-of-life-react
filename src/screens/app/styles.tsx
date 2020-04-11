@@ -14,6 +14,12 @@ export const AppCSS = styled.div`
 
 export const BodyContainerCSS = styled.div`
   position: relative;
+
+  #status {
+    margin-top: 1rem;
+    text-align: center;
+    color: #cccccc;
+  }
 `
 export const HeaderCSS = styled.h2`
   margin-bottom: 2rem;

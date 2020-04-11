@@ -10,6 +10,7 @@ export const socket = io(process.env.REACT_APP_API || 'http://localhost:8080');
 
 export const EVENTS = {
   RECONNECT: 'reconnect',
+  DISCONNECT: 'disconnect',
   ALL_USERS: 'getAllUsers',
   SELF: 'getSelf',
   USER_JOIN: 'userJoin',
@@ -29,7 +30,6 @@ socket.on(EVENTS.RECONNECT, () => {
   const oldSocketId = Cookies.get('currentSocketId');
   socket.emit(EVENTS.USER_REENTER_GAME, oldSocketId);
 })
-
 
 export const getBoard = (callback: Function) => {
   socket.on(EVENTS.CURRENT_BOARD, (board: ICell[][]) => {
@@ -85,6 +85,14 @@ export const getAllUsers = (callback:Function) => {
     })
   )
 }
+
+export const onDisconnect = (callback:Function) => {
+  return (
+    socket.on(EVENTS.DISCONNECT, () => {
+      callback();
+    })
+  )
+};
 
 
 export default socket;
