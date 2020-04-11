@@ -1,0 +1,11 @@
+language: node_js
+node_js:
+- node
+before-script:
+- npm run build
+deploy:
+  provider: heroku
+  api_key:
+    secure: "Gq9ItHBrmcNGW9hpiNRhhDZiOjLKuO23gi6+3/EuNcElGwmOgaC+VoQyuUT5G7Lzv0zGAu1HZj6+cA/ut/V7v1tJA5MkC5C8oILKkmxma5UNRB6V1HO41Q9t6ZlXvJRuZNF6sep80n7Jp3WVsuO8tjNAKid3P57jcsoUVerSByhQCEt5jqIIJvpVyNQq2a0Y3GZ0LQykLofwv2CtEXAvJSZm6Z40bl+hBaLTR30Okbjo17Lo6qQJ4foIjbjrCtqWIz1Yj5I82ZXysOVDJGTI4tgBgDUqUWVZKU2T1KzHUSI7gT2cpfXlyzxVrXErHKvIlLo7+wHsrMeyw2q0+RSTGGXlYiQsulroY1/ZCzjTdroZs0qRzs/a0iTwxaVt57mNiKUmK/NAQn0a2MzWUjXpheRInCJNowQCCPkycNGKYXDq/yvrgOdZVeTtc6Zn0YaYDEkDUE97pSMBMDCqRojwZeM95HuEjmYg53MW3BmYM7qFa48p8fUrBdbK/pqsEF3APx3vZmEOYLYWFGucrAvqsejbh/R7ShcG2tz0TTDtr5aIrfCzybcEk8Fuw8U0M/AfoaZzohdWIobLr2jLSPf/P4HGP+MRhz2o3vfDzCN+dNPEpMwg2vEOG+gBmi+uEOpqxBI3DHdDRW4hsJ0ZhdIKFkeGheYFiqao/xKDZcZdRu0="
+  app: gol-react-ryuash
+
