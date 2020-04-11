@@ -1,10 +1,7 @@
 import React from 'react';
-import { ICell } from '@interfaces/boardTypes';
 import { useBoardHook } from './hooks';
-import { 
-  TableCSS,
-  CellCSS
-} from './styles';
+import Shapes from './components/shapes';
+import Grid from './components/grid';
 import { IBoard } from './interface';
 
 const Board = (props: IBoard) => {
@@ -14,29 +11,15 @@ const Board = (props: IBoard) => {
 
   const {
     board,
-    handleBoardClick
+    handleBoardClick,
+    handleSetShape
   } = useBoardHook(user);
   
   return (
-    <TableCSS>
-      <tbody>
-        {board.map((col: ICell[], colIndex: any) => {
-          return (
-            <tr key={colIndex}>
-              {col.map((row: ICell, rowIndex: any) => {
-                return (
-                  <CellCSS
-                    row={row}
-                    key={rowIndex} 
-                    onClick={() => handleBoardClick(colIndex, rowIndex)}
-                  />
-                )
-              })}
-            </tr>
-          )
-        })}
-      </tbody>
-    </TableCSS>
+    <>
+      <Shapes handleSetShape={handleSetShape} />
+      <Grid board={board} handleBoardClick={handleBoardClick} />
+    </>
   );
 };
 

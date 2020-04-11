@@ -60,8 +60,49 @@ export const useBoardHook = (user:IUser) => {
     setBoard(newBoard);
   }
 
+  const generateRandomNumber = (max:number) => {
+    return Math.floor(Math.random() * Math.floor(max));
+  }
+
+  const handleSetShape = (shape:number[][]) => {
+    let startCol = generateRandomNumber(board.length - (shape.length - 1));
+    let startRow = generateRandomNumber(board[0].length - (shape[0].length -1));
+    
+    const newBoard = R.clone(board);
+    const {
+      colorR,
+      colorB,
+      colorG
+    } = user;
+    const updateBoardCells = [];
+    
+    for (let col = 0; col <= shape.length - 1; col += 1) {
+      for (let row = 0; row <= shape[col].length - 1; row += 1) {
+        const current = shape[col][row];
+        const currentCol = startCol + col;
+        const currentRow = startRow + row;
+        if (current) {
+          newBoard[currentCol][currentRow] = {
+            value: 1,
+            colorR,
+            colorB,
+            colorG
+          }
+
+          updateBoardCells.push({
+            col: currentCol,
+            row: currentRow
+          });
+        }
+      }
+    }
+
+    setBoard(newBoard);
+  }
+
   return {
     board,
     handleBoardClick,
+    handleSetShape
   }
 }

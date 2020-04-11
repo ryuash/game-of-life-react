@@ -4,7 +4,6 @@ import { useAppHook } from './hooks';
 import JoinGame from './components/joinGame';
 import Board from './components/board';
 import Users from './components/users';
-import Shapes from './components/shapes';
 import { 
   AppCSS, 
   BodyContainerCSS 
@@ -23,7 +22,6 @@ function App() {
     <>
       <AppCSS>
         <BodyContainerCSS>
-          <Shapes user={user} />
           <Board user={user} />
           <Users />
         </BodyContainerCSS>
