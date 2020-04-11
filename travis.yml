@@ -3,6 +3,7 @@ node_js:
 - node
 before-script:
 - npm run build
+script:
 deploy:
   provider: heroku
   api_key:
