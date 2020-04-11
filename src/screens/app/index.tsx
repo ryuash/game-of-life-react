@@ -24,9 +24,7 @@ function App() {
     <>
       <AppCSS>
         <HeaderCSS>
-          <h2>
-            [ Conway's Game of Life ]
-          </h2>
+          [ Conway's Game of Life ]
         </HeaderCSS>
         <BodyContainerCSS>
           <Board user={user} />

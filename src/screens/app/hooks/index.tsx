@@ -16,7 +16,7 @@ export const useAppHook = () => {
   useEffect(() => {
     getSelf(getSelfCallback);
     return () => {
-      socketOff(EVENTS.GET_SELF)
+      socketOff(EVENTS.SELF)
     }
   }, [getSelfCallback])
 

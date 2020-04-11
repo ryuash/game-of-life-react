@@ -10,26 +10,6 @@ const mixins: any = {
     max-width: 200px;
     border-radius: 4px;
   `,
-  shapes: css`
-    border-collapse: collapse;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 1rem;
-    transition: 0.3s;
-
-    &:hover {
-      cursor: pointer;
-      opacity: 0.7
-    }
-
-    td {
-      width: 10px;
-      height: 10px;
-      border: solid 1px white;
-      background: #b1b1b1;
-    }
-  `,
 };
 
 export default mixins;

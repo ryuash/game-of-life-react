@@ -12,9 +12,11 @@ import {
 
 export const useBoardHook = (user:IUser) => {
   const [board, setBoard]:any[] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const getBoardCallback = useCallback((board: ICell[][]) => {
     setBoard(board);
+    setLoading(false);
   }, []);
 
   const onBoardUpdateCallback = useCallback((board: ICell[][]) => {
@@ -25,8 +27,8 @@ export const useBoardHook = (user:IUser) => {
     getBoard(getBoardCallback);
     onBoardUpdate(onBoardUpdateCallback);
     return () => {
-      socketOff(EVENTS.GET_CURRENT_BOARD)
-      socketOff(EVENTS.GET_SELF)
+      socketOff(EVENTS.CURRENT_BOARD)
+      socketOff(EVENTS.SELF)
     }
   }, [getBoardCallback, onBoardUpdateCallback])
 
@@ -101,6 +103,7 @@ export const useBoardHook = (user:IUser) => {
   }
 
   return {
+    loading,
     board,
     handleBoardClick,
     handleSetShape

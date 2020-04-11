@@ -20,6 +20,7 @@ const GlobalCSS = createGlobalStyle`
   }
 
   body {
+    color: #505058;
     margin: 0;
     width: 100%;
     min-height: 100%;
@@ -34,6 +35,11 @@ const GlobalCSS = createGlobalStyle`
   h6 {
     font-weight: 600;
     margin: 0 0 0 0;
+  }
+
+  a, a:hover, a:focus, a:active {
+    text-decoration: none;
+    color: inherit;
   }
 `;
 

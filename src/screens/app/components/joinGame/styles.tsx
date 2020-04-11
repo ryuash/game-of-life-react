@@ -13,5 +13,3 @@ export const JoinGameCSS = styled.div`
     margin: 0;
   }
 `;
-
-export const FormCSS = styled

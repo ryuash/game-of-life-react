@@ -15,6 +15,6 @@ export const AppCSS = styled.div`
 export const BodyContainerCSS = styled.div`
   position: relative;
 `
-export const HeaderCSS = styled.div`
+export const HeaderCSS = styled.h2`
   margin-bottom: 2rem;
 `

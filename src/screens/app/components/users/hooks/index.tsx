@@ -12,9 +12,9 @@ import {
 export const useUsersHook = () => {
   const [users, setUsers]: any = useState({});
 
-  const getAllUsersCallback = (allUsers: any) => {
+  const getAllUsersCallback = useCallback((allUsers:any) => {
     setUsers(allUsers);
-  };
+  }, [users]);
 
   const userJoinCallback = useCallback((newUser:IUser) => {
     const currentUsers = R.clone(users);
@@ -35,7 +35,7 @@ export const useUsersHook = () => {
     userLeft(userLeftCallback);
     return () => {
       socketOff(EVENTS.USER_JOIN);
-      socketOff(EVENTS.GET_ALL_USERS);
+      socketOff(EVENTS.ALL_USERS);
       socketOff(EVENTS.USER_LEFT);
     };
   }, [userJoinCallback, userLeftCallback]);

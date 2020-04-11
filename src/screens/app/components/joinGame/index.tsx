@@ -1,9 +1,10 @@
 import React from 'react';
 import { Button, Form } from 'semantic-ui-react';
 import Loading from '@components/loading';
-import { JoinGameCSS } from './styles';
 import { useJoinGameHook } from './hooks';
 import CreatedBy from '../createdBy';
+import Title from '../title';
+import { JoinGameCSS } from './styles';
 
 const JoinGame = () => {
   const {
@@ -15,8 +16,11 @@ const JoinGame = () => {
   return (
     <>
       <Loading active={loading} />
+      <Title />
       <JoinGameCSS>
-        <h3>[ Join Game ]</h3>
+        <h3>
+          [ Join Game ]
+        </h3>
         <Form onSubmit={handleFormSubmit}>
           <Form.Group>
             <Form.Input

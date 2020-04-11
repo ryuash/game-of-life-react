@@ -10,13 +10,13 @@ export const socket = io(process.env.REACT_APP_API || 'http://localhost:8080');
 
 export const EVENTS = {
   RECONNECT: 'reconnect',
+  ALL_USERS: 'getAllUsers',
+  SELF: 'getSelf',
   USER_JOIN: 'userJoin',
-  GET_ALL_USERS: 'getAllUsers',
-  USER_LEFT: 'userLeft',
-  GET_SELF: 'getSelf',
   USER_ENTER_GAME: 'userEnterGame',
   USER_REENTER_GAME: 'userReenterGame',
-  GET_CURRENT_BOARD: 'getCurrentBoard',
+  USER_LEFT: 'userLeft',
+  CURRENT_BOARD: 'getCurrentBoard',
   CLICK_BOARD: 'clickBoard',
   BOARD_UPDATE: 'boardUpdate',
 }
@@ -32,7 +32,7 @@ socket.on(EVENTS.RECONNECT, () => {
 
 
 export const getBoard = (callback: Function) => {
-  socket.on(EVENTS.GET_CURRENT_BOARD, (board: ICell[][]) => {
+  socket.on(EVENTS.CURRENT_BOARD, (board: ICell[][]) => {
     callback(board);
   })
 }
@@ -49,7 +49,7 @@ export const onBoardUpdate = (callback: Function) => {
 
 export const getSelf = (callback: Function) => {
   return (
-    socket.on(EVENTS.GET_SELF, (user: IUser) => {
+    socket.on(EVENTS.SELF, (user: IUser) => {
       Cookies.set('currentSocketId', socket.id , { expires: 1 });
       callback(user);
     })
@@ -80,7 +80,7 @@ export const userLeft = (callback:Function) => {
 
 export const getAllUsers = (callback:Function) => {
   return (
-    socket.on(EVENTS.GET_ALL_USERS, (users: IUser) => {
+    socket.on(EVENTS.ALL_USERS, (users: IUser) => {
       callback(users);
     })
   )

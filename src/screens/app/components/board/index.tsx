@@ -1,4 +1,5 @@
 import React from 'react';
+import Loading from '@components/loading';
 import { useBoardHook } from './hooks';
 import Shapes from './components/shapes';
 import Grid from './components/grid';
@@ -12,11 +13,13 @@ const Board = (props: IBoard) => {
   const {
     board,
     handleBoardClick,
-    handleSetShape
+    handleSetShape,
+    loading
   } = useBoardHook(user);
-  
+  console.log(loading,'the loading')
   return (
     <>
+      <Loading active={loading} />
       <Shapes handleSetShape={handleSetShape} />
       <Grid board={board} handleBoardClick={handleBoardClick} />
     </>
