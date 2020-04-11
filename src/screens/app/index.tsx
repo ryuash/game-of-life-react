@@ -16,6 +16,7 @@ function App() {
     user,
     connected
   } = useAppHook();
+  
   if (!user.socketId) {
     return (
       <JoinGame />

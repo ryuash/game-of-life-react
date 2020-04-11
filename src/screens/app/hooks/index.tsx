@@ -1,4 +1,5 @@
 import { useEffect, useState, useCallback } from 'react';
+import * as R from 'ramda';
 import { IUser } from '@interfaces/usersTypes';
 import { 
   EVENTS,
@@ -11,14 +12,18 @@ export const useAppHook = () => {
   const [user, setUser]:any = useState({});
   const [connected, setConnection] = useState(false);
 
-  const getSelfCallback = useCallback((user: IUser) => {
-    setUser(user);
-    setConnection(true);
-  }, []);
+  const getSelfCallback = useCallback((self: IUser) => {
+    if (!R.equals(user, self)) {
+      setUser(self);
+      setConnection(true);
+    }
+  }, [user]);
 
   const onDisconnectCallback = useCallback(() => {
-    setConnection(false);
-  }, []);
+    if(connected) {
+      setConnection(false);
+    }
+  }, [connected]);
 
   useEffect(() => {
     getSelf(getSelfCallback);
@@ -27,7 +32,7 @@ export const useAppHook = () => {
       socketOff(EVENTS.SELF)
       socketOff(EVENTS.DISCONNECT)
     }
-  }, [getSelfCallback])
+  }, [getSelfCallback, onDisconnectCallback])
 
   return {
     user,

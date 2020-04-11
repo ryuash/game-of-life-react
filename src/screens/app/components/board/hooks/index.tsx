@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import * as R from 'ramda';
 import { ICell, IAliveCell } from '@interfaces/boardTypes';
+import { toastError } from '@utils/toastError';
 import { IUser } from '@interfaces/usersTypes';
 import { 
   EVENTS,
@@ -14,14 +15,25 @@ export const useBoardHook = (user:IUser) => {
   const [board, setBoard]:any[] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const getBoardCallback = useCallback((board: ICell[][]) => {
-    setBoard(board);
+  const getBoardCallback = useCallback((newBoard: ICell[][]) => {
+    setBoard(newBoard);
     setLoading(false);
   }, []);
 
-  const onBoardUpdateCallback = useCallback((board: ICell[][]) => {
-    setBoard(board);
-  }, []);
+  const compareBoard = (oldBoard: ICell[][], newBoard: ICell[][]) => {
+    for (let col = 0; col <= oldBoard.length; col += 1) {
+      if (!R.equals(oldBoard[col], newBoard[col])) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  const onBoardUpdateCallback = useCallback((newBoard: ICell[][]) => {
+    if(!compareBoard(board,newBoard)) {
+      setBoard(newBoard);
+    }
+  }, [board]);
 
   useEffect(() => {
     getBoard(getBoardCallback);
@@ -40,26 +52,31 @@ export const useBoardHook = (user:IUser) => {
   }
 
   const handleBoardClick = (col: number, row: number) => {
-    onBoardClick([{col,row}]);
-    const newBoard = R.clone(board);
-    const check = isCellOwner(newBoard[col][row], user);
-    if (check) {
-      newBoard[col][row] = 0;
-    } else {
-      const {
-        colorR,
-        colorB,
-        colorG
-      } = user;
-  
-      newBoard[col][row] = {
-        value: 1,
-        colorR,
-        colorB,
-        colorG
+    try {
+      onBoardClick([{col,row}]);
+      const newBoard = R.clone(board);
+      const check = isCellOwner(newBoard[col][row], user);
+      if (check) {
+        newBoard[col][row] = 0;
+      } else {
+        const {
+          colorR,
+          colorB,
+          colorG
+        } = user;
+    
+        newBoard[col][row] = {
+          value: 1,
+          colorR,
+          colorB,
+          colorG
+        }
       }
+      setBoard(newBoard);
+    } catch (error) {
+      console.error(error);
+      toastError('Unable to update cell');
     }
-    setBoard(newBoard);
   }
 
   const generateRandomNumber = (max:number) => {
@@ -67,39 +84,44 @@ export const useBoardHook = (user:IUser) => {
   }
 
   const handleSetShape = (shape:number[][]) => {
-    let startCol = generateRandomNumber(board.length - (shape.length - 1));
-    let startRow = generateRandomNumber(board[0].length - (shape[0].length -1));
-    
-    const newBoard = R.clone(board);
-    const {
-      colorR,
-      colorB,
-      colorG
-    } = user;
-    const updateBoardCells = [];
-    
-    for (let col = 0; col <= shape.length - 1; col += 1) {
-      for (let row = 0; row <= shape[col].length - 1; row += 1) {
-        const current = shape[col][row];
-        const currentCol = startCol + col;
-        const currentRow = startRow + row;
-        if (current) {
-          newBoard[currentCol][currentRow] = {
-            value: 1,
-            colorR,
-            colorB,
-            colorG
-          }
+    try {
+      let startCol = generateRandomNumber(board.length - (shape.length - 1));
+      let startRow = generateRandomNumber(board[0].length - (shape[0].length -1));
+      
+      const newBoard = R.clone(board);
+      const {
+        colorR,
+        colorB,
+        colorG
+      } = user;
+      const updateBoardCells = [];
+      
+      for (let col = 0; col <= shape.length - 1; col += 1) {
+        for (let row = 0; row <= shape[col].length - 1; row += 1) {
+          const current = shape[col][row];
+          const currentCol = startCol + col;
+          const currentRow = startRow + row;
+          if (current) {
+            newBoard[currentCol][currentRow] = {
+              value: 1,
+              colorR,
+              colorB,
+              colorG
+            }
 
-          updateBoardCells.push({
-            col: currentCol,
-            row: currentRow
-          });
+            updateBoardCells.push({
+              col: currentCol,
+              row: currentRow
+            });
+          }
         }
       }
+      onBoardClick(updateBoardCells);
+      setBoard(newBoard);
+    } catch (error) {
+      console.error(error);
+      toastError('Unable to add shape.')
     }
-    onBoardClick(updateBoardCells);
-    setBoard(newBoard);
   }
 
   return {

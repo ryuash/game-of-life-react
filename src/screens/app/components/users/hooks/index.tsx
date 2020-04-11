@@ -13,20 +13,26 @@ export const useUsersHook = () => {
   const [users, setUsers]: any = useState({});
 
   const getAllUsersCallback = useCallback((allUsers:any) => {
-    setUsers(allUsers);
-  }, []);
+    if (!R.equals(users,allUsers)) {
+      setUsers(allUsers);
+    }
+  }, [users]);
 
   const userJoinCallback = useCallback((newUser:IUser) => {
-    const currentUsers = R.clone(users);
     const { socketId } = newUser;
-    currentUsers[socketId] = newUser;
-    setUsers(currentUsers);
+    if (!users.hasOwnProperty(socketId)) {
+      const currentUsers = R.clone(users);
+      currentUsers[socketId] = newUser;
+      setUsers(currentUsers);
+    }
   }, [users]);
 
   const userLeftCallback = useCallback((socketId: string) => {
-    const currentUsers = R.clone(users);
-    delete currentUsers[socketId];
-    setUsers(currentUsers);
+    if (users.hasOwnProprty(socketId)) {
+      const currentUsers = R.clone(users);
+      delete currentUsers[socketId];
+      setUsers(currentUsers);
+    }
   }, [users])
 
   useEffect(() => {
