@@ -1,6 +1,9 @@
 import io from 'socket.io-client';
 import Cookies from 'js-cookie';
-import { ICell } from '@interfaces/boardTypes';
+import { 
+  ICell,
+  IBoardClick
+} from '@interfaces/boardTypes';
 import { IUser } from '@interfaces/usersTypes';
 
 export const socket = io(process.env.REACT_APP_API || 'http://localhost:8080');
@@ -34,8 +37,8 @@ export const getBoard = (callback: Function) => {
   })
 }
 
-export const onBoardClick = (row: number, col: number) => {
-  socket.emit(EVENTS.CLICK_BOARD, row, col);
+export const onBoardClick = (data:IBoardClick[]) => {
+  socket.emit(EVENTS.CLICK_BOARD, data);
 }
 
 export const onBoardUpdate = (callback: Function) => {

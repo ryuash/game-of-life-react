@@ -38,7 +38,7 @@ export const useBoardHook = (user:IUser) => {
   }
 
   const handleBoardClick = (col: number, row: number) => {
-    onBoardClick(col,row);
+    onBoardClick([{col,row}]);
     const newBoard = R.clone(board);
     const check = isCellOwner(newBoard[col][row], user);
     if (check) {
@@ -96,7 +96,7 @@ export const useBoardHook = (user:IUser) => {
         }
       }
     }
-
+    onBoardClick(updateBoardCells);
     setBoard(newBoard);
   }
 
