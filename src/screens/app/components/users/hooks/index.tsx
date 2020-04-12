@@ -28,7 +28,7 @@ export const useUsersHook = () => {
   }, [users]);
 
   const userLeftCallback = useCallback((socketId: string) => {
-    if (users.hasOwnProprty(socketId)) {
+    if (users.hasOwnProperty(socketId)) {
       const currentUsers = R.clone(users);
       delete currentUsers[socketId];
       setUsers(currentUsers);

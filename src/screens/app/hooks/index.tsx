@@ -5,7 +5,8 @@ import {
   EVENTS,
   socketOff,
   getSelf,
-  onDisconnect
+  onDisconnect,
+  disconnect
 } from '@src/socket';
 
 export const useAppHook = () => {
@@ -22,6 +23,7 @@ export const useAppHook = () => {
   const onDisconnectCallback = useCallback(() => {
     if(connected) {
       setConnection(false);
+      disconnect();
     }
   }, [connected]);
 

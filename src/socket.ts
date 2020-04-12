@@ -94,5 +94,11 @@ export const onDisconnect = (callback:Function) => {
   )
 };
 
+export const disconnect = () => {
+  return (
+    socket.emit(EVENTS.DISCONNECT)
+  )
+};
+
 
 export default socket;
